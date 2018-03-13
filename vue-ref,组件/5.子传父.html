@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>我是你的父亲{{num}}</h3>
+        <hr>
+        <child-pa :pnum="num" @changen = "changenum"></child-pa>
+    </div>
+<script src="vue.js"></script>  
+<script>
+    const childPa = {
+        template:`
+            <div>
+                <button
+                    @click="click"
+                >我就是一个增加按钮</button>
+                <p>{{num}}</p>
+            </div>
+        `,
+        props:['pnum'],
+        data(){
+            return{
+                num:this.pnum,
+            }
+        },
+        methods:{
+            click(){
+                this.num++;
+                this.$emit('changen',this.num);
+            }
+        }
+    }
+    Vue.component('child-pa',childPa);
+    new Vue({
+        el:"#app",
+        data:{
+            num:10,
+        },
+        methods:{
+            changenum(num){
+                this.num=num;
+            }
+        }
+    })
+</script>
+</body>
+</html>

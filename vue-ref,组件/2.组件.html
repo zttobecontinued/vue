@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>这些都是子组件</h1>
+        <child-pa></child-pa>
+    </div>
+<script src="vue.js"></script>
+<script>
+    let childPa ={
+        template:`
+            <div
+                @click="click"
+                @mousedown.prevent=""
+            >我是子组件{{num2}}</div>
+        `,
+        data(){
+            return {
+                num:1,
+            }
+        },
+        methods:{
+            click(){
+                ++ this.num
+            }
+        },
+        computed:{
+            num2(){
+                return this.num<10?'0'+this.num:''+this.num;
+            }
+        }
+    }
+    Vue.component('child-pa',childPa);
+    new Vue({
+        el:'#app',
+        data:{
+            num:'hehe'
+        }
+    })
+</script>
+</body>
+</html>
